@@ -38,7 +38,7 @@
 
 
 #import "NoiseGenerator.h"
-#import <CoreAudio/AudioHardware.h>
+#import <CoreAudio/CoreAudioTypes.h>
 
 
 @interface NoiseGenerator (Internal)
@@ -48,7 +48,7 @@
 - (void)startAudio;
 - (void)stopAudio;
 - (void)_processBuffer:(AudioQueueBufferRef)buffer;
-- (OSStatus)defaultOutputDeviceChanged;
+//- (OSStatus)defaultOutputDeviceChanged;
 @end
 
 
@@ -67,11 +67,13 @@ static void sAudioQueueOutputCallback(void *inUserData, AudioQueueRef inAQ, Audi
 }
 
 
+/*
 static OSStatus sDefaultOutputDeviceChanged(AudioHardwarePropertyID inPropertyID, void *inClientData)
 {
     NoiseGenerator *generator = (NoiseGenerator *)inClientData;
     return [generator defaultOutputDeviceChanged];    
 }
+*/
 
 
 @implementation NoiseGenerator
@@ -241,7 +243,7 @@ static OSStatus sDefaultOutputDeviceChanged(AudioHardwarePropertyID inPropertyID
     AudioQueueEnqueueBuffer(_queue, audioQueueBuffer, 0, NULL);
 }
 
-
+/*
 - (OSStatus) defaultOutputDeviceChanged
 {
     [self stopAudio];
@@ -249,7 +251,7 @@ static OSStatus sDefaultOutputDeviceChanged(AudioHardwarePropertyID inPropertyID
 
     return kAudioHardwareNoError;
 }
-
+*/
 
 
 - (void)setVolume:(double)newVolume
